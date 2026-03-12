@@ -76,6 +76,10 @@ app.get("/health", (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.json({ message: "Warehouse API veikia. Naudokite /health arba /auth/login" });
+});
+
 app.use("/warehouse", authorization, warehouseRouters);
 app.use("/auth", authRouters);
 app.use((req, res) => {
@@ -83,10 +87,14 @@ app.use((req, res) => {
 });
 
 app.use(errorHandler);
-if (process.env.NODE_ENV === "development") {
-  app.listen(process.env.PORT || 3001, () => {
-    console.log(`Serveris veikia`);
+
+// Always export the app for Vercel
+module.exports = app;
+
+// Only listen in development (local)
+if (process.env.NODE_ENV !== "production") {
+  const PORT = process.env.PORT || 3001;
+  app.listen(PORT, () => {
+    console.log(`Serveris veikia ${PORT} lange`);
   });
-} else {
-  module.exports = app;
 }

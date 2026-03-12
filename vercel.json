@@ -1,8 +1,9 @@
 {
-  "rewrites": [
+  "buildCommand": "npm install",
+  "routes": [
     {
-      "source": "/(.*)",
-      "destination": "/src/app.js"
+      "src": "/(.*)",
+      "dest": "src/app.js"
     }
   ]
 }
