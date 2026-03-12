@@ -12,3 +12,5 @@ coverage/
 *.swo
 *.bak
 *.zip   
+.vercel
+.env*.local
